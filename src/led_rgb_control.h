@@ -18,8 +18,6 @@
 #ifndef LED_RGB_CONTROL_H
 #define LED_RGB_CONTROL_H
 
-#define EMBER_AF_PLUGIN_LED_RGB_CONTROL_ALL_LED	(~(0xff << EMBER_AF_PLUGIN_LED_RGB_CONTROL_LED_COUNT))
-
 
 void ledRgbControlBlinkEventHandler(void);
 

@@ -20,22 +20,30 @@
 #include "led_rgb_control_platform.h"
 #include "led_rgb_control.h"
 
-#if defined(EMBER_AF_PLUGIN_LED_RGB_CONTROL_DEBUG) && defined(EMBER_AF_PRINT_ENABLE)
-#  if defined(EMBER_AF_PRINT_CUSTOM1)
-#  define debugPrintln emberAfCustom1Println
-#  elif defined(EMBER_AF_PRINT_CUSTOM2)
-#  define debugPrintln emberAfCustom2Println
-#  elif defined(EMBER_AF_PRINT_CUSTOM3)
-#  define debugPrintln emberAfCustom3Println
-#  else
-#  define debugPrintln emberAfAppPrintln
-#  endif
+#if defined(LED_RGB_CONTROL_DEBUG)
+#	if defined(EMBER_AF_PRINT_ENABLE)
+#  		if defined(EMBER_AF_PRINT_CUSTOM1)
+#  		define debugPrintln emberAfCustom1Println
+#  		elif defined(EMBER_AF_PRINT_CUSTOM2)
+#  		define debugPrintln emberAfCustom2Println
+#  		elif defined(EMBER_AF_PRINT_CUSTOM3)
+#  		define debugPrintln emberAfCustom3Println
+#  		else
+#  		define debugPrintln emberAfAppPrintln
+#		endif
+#	else
+#	define debugPrintln(fmt,args...)	printf(fmt "%s", ## args, "\r\n")
+#  	endif
 #else
   #define debugPrintln(...)
 #endif
 
 #ifndef LED_RGB_CONTROL_LED_COUNT
 #define LED_RGB_CONTROL_LED_COUNT (4)
+#endif
+
+#ifndef LED_RGB_CONTROL_BLINK_PERIOD
+#define LED_RGB_CONTROL_BLINK_PERIOD (400)
 #endif
 
 #define INVALID_INDEX	LED_RGB_CONTROL_LED_COUNT
@@ -48,8 +56,8 @@ struct rgbOutput
 	uint8_t brightness;
 };
 struct rgbOutput ledOutputState[LED_RGB_CONTROL_LED_COUNT] = {0};
-#define BLINKING_ONOFF_MS	(200)
-#define BLINKING_PERIOD_SEC2COUNT(sec)	(sec*1000/BLINKING_ONOFF_MS/2)
+#define LED_RGB_CONTROL_BLINK_ONOFF_MS	(LED_RGB_CONTROL_BLINK_PERIOD/2)
+#define BLINKING_PERIOD_SEC2COUNT(sec)	(sec*1000/LED_RGB_CONTROL_BLINK_ONOFF_MS/2)
 static struct rgbOutput blOn={0,200,0,80};
 static struct rgbOutput blOff={0,0,0,80};
 
@@ -123,7 +131,7 @@ void ledRgbControlBlinkEventHandler(void)
 {
 	if(blinkingCount)
 	{
-		ledRgbControlBlinkEventControlSetDelayMS(BLINKING_ONOFF_MS);
+		ledRgbControlBlinkEventControlSetDelayMS(LED_RGB_CONTROL_BLINK_ONOFF_MS);
 		if(blinkFlag)
 		{
 			blinkingCount--;

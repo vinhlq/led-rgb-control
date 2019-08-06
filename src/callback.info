@@ -1,0 +1,15 @@
+#include "led_rgb_control_platform.h"
+
+/** @brief LED RGB Control
+ *  called from led-rgb-custom plugin, need to be implemented by app
+ *  to control led RGB
+ *
+ *  @param index
+ *  @param currentLevel 0:255
+ *  @param R8 R 0:255
+ *  @param R8 G 0:255
+ *  @param B8 B 0:255
+ */
+void emberAfPluginLedRGBControlOutputWRGBCallback(uint8_t index, uint8_t currentLevel, uint8_t R8, uint8_t G8, uint8_t B8)
+{
+}
