@@ -20,7 +20,7 @@
 #include "led_rgb_control_platform.h"
 #include "led_rgb_control.h"
 
-#if defined(LED_RGB_CONTROL_DEBUG)
+#if defined(LED_RGB_CONTROL_DEBUG_ENABLED)
 #	if defined(EMBER_AF_PRINT_ENABLE)
 #  		if defined(EMBER_AF_PRINT_CUSTOM1)
 #  		define debugPrintln emberAfCustom1Println
@@ -166,6 +166,7 @@ void ledRgbControlBlinkEventHandler(void)
 	{
 		ledRgbControlLedToggleRGBAll(&blOn, &blOff);
 	}
+//	debugPrintln("Blink");
 }
 
 void ledRgbControlLedStateRestore(uint8_t index)
@@ -193,8 +194,7 @@ void ledRgbControlLedStateRestoreAll(void)
 
 void ledRgbControlLedOutput(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
 {
-	if(	index < 0 ||
-		index >= LED_RGB_CONTROL_LED_COUNT)
+	if(index >= LED_RGB_CONTROL_LED_COUNT)
 	{
 		return;
 	}

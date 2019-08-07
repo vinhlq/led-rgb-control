@@ -65,7 +65,7 @@
 
 #define LED_RGB_CONTROL_LED_COUNT 		EMBER_AF_PLUGIN_LED_RGB_CONTROL_LED_COUNT
 #define LED_RGB_CONTROL_BLINK_PERIOD	EMBER_AF_PLUGIN_LED_RGB_CONTROL_BLINK_PERIOD
-#define LED_RGB_CONTROL_DEBUG			EMBER_AF_PLUGIN_LED_RGB_CONTROL_DEBUG
+#define LED_RGB_CONTROL_DEBUG_ENABLED	EMBER_AF_PLUGIN_LED_RGB_CONTROL_DEBUG
 #define ledRGBControlOutputWRGBCallback emberAfPluginLedRGBControlOutputWRGBCallback
 #define ledRgbControlBlinkEventHandler	emberAfPluginLedRgbControlBlinkEventHandler
 
@@ -77,7 +77,7 @@
 * Structure Definitions
 *******************************************************************************/
 
-extern uint16_t ledRgbControlEventNumber;
+extern EmberEventControl emberAfPluginLedRgbControlBlinkEventControl;
 
 #define ledRgbControlBlinkEventControlSetActive()				emberEventControlSetActive(emberAfPluginLedRgbControlBlinkEventControl)
 #define ledRgbControlBlinkEventControlSetDelayMS(timerPeriodMs)	emberEventControlSetDelayMS(emberAfPluginLedRgbControlBlinkEventControl, timerPeriodMs)

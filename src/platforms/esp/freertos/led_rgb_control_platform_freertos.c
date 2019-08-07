@@ -97,6 +97,7 @@ uint16_t ledRgbControlEventNumber = FREERTOS_EVENT_CONTROL_MAX_EVENT;
 
 static const FreertosEventControl_t blinkEventControl =
 {
+	.name = "rgb-control",
 	.callback = (freertosEventControlCallback_t)ledRgbControlBlinkEventHandler,
 	.args = NULL
 };

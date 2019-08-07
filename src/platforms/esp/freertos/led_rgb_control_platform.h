@@ -95,11 +95,10 @@ extern uint16_t ledRgbControlEventNumber;
 #define ledRgbControlBlinkEventControlSetActive()				freertosEventControlSetActive(ledRgbControlEventNumber)
 #define ledRgbControlBlinkEventControlSetDelayMS(timerPeriodMs)	freertosEventControlSetDelayMS(ledRgbControlEventNumber, timerPeriodMs)
 #define ledRgbControlBlinkEventControlSetInactive()				freertosEventControlSetInactive(ledRgbControlEventNumber)
+#define ledRgbControlBlinkEventControlDebugEnable()				freertosEventControlDebugEnable(ledRgbControlEventNumber);
 /*******************************************************************************
 * Function Prototypes
 *******************************************************************************/
-
-void capSenseCY8CMBR3xxxEventHandler(void);
 
 void ledRgbControlPlatformInit(void);
 
