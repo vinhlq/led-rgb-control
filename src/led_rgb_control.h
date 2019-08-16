@@ -64,6 +64,8 @@ void ledRgbControlLedOutputAll(uint8_t level, uint8_t outputR, uint8_t outputG, 
  */
 void ledRgbControlLedOutput(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
 
+#define ledRgbControlLedSetOutput	ledRGBControlOutputWRGBCallback
+
 /** @brief start blink all led
  *
  *
