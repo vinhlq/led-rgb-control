@@ -192,7 +192,7 @@ void ledRgbControlLedStateRestoreAll(void)
 	}
 }
 
-void ledRgbControlLedOutput(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
+void ledRgbControlLedSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
 {
 	if(index >= LED_RGB_CONTROL_LED_COUNT)
 	{
@@ -211,7 +211,7 @@ void ledRgbControlLedOutput(uint8_t index, uint8_t level, uint8_t outputR, uint8
 	ledRgbControlLedStateSet(index, level, outputR, outputG, outputB);
 }
 
-void ledRgbControlLedOutputAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
+void ledRgbControlLedSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
 {
 	uint8_t i;
 

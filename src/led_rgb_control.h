@@ -55,14 +55,14 @@ void ledRgbControlLedBlinkStopAll(void);
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedOutputAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
+void ledRgbControlLedSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedOutput(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
+void ledRgbControlLedSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
 
 #define ledRgbControlLedSetOutput	ledRGBControlOutputWRGBCallback
 
