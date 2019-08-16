@@ -85,7 +85,7 @@
 #include "led_rgb_control_platform.h"
 #include "led_rgb_control.h"
 
-uint16_t ledRgbControlEventNumber = FREERTOS_EVENT_CONTROL_MAX_EVENT;
+uint16_t ledRgbControlEventNumber = EVENT_CONTROL_MAX_EVENT;
 
 /*******************************************************************************
 * API Constants
@@ -95,16 +95,16 @@ uint16_t ledRgbControlEventNumber = FREERTOS_EVENT_CONTROL_MAX_EVENT;
 *   Function Code
 *******************************************************************************/
 
-static const FreertosEventControl_t blinkEventControl =
+static const EventControl_t blinkEventControl =
 {
 	.name = "rgb-control",
-	.callback = (freertosEventControlCallback_t)ledRgbControlBlinkEventHandler,
+	.callback = (EventControlCallback_t)ledRgbControlBlinkEventHandler,
 	.args = NULL
 };
 
 void ledRgbControlPlatformInit(void)
 {
-	ledRgbControlEventNumber = freertosEventControlRegister(&blinkEventControl);
+	ledRgbControlEventNumber = eventControlRegister(&blinkEventControl);
 }
 
 /****************************End of File***************************************/

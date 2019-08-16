@@ -56,7 +56,11 @@
 *******************************************************************************/
 #include<stdint.h>
 #include "freertos/FreeRTOS.h"
-#include "event-control-freertos/event-control.h"
+#include "freertos/task.h"
+#include "freertos/queue.h"
+
+#include "event-control-platform.h"
+#include "event-control.h"
 
 /*******************************************************************************
 * User defined Macros
@@ -92,10 +96,10 @@
 
 extern uint16_t ledRgbControlEventNumber;
 
-#define ledRgbControlBlinkEventControlSetActive()				freertosEventControlSetActive(ledRgbControlEventNumber)
-#define ledRgbControlBlinkEventControlSetDelayMS(timerPeriodMs)	freertosEventControlSetDelayMS(ledRgbControlEventNumber, timerPeriodMs)
-#define ledRgbControlBlinkEventControlSetInactive()				freertosEventControlSetInactive(ledRgbControlEventNumber)
-#define ledRgbControlBlinkEventControlDebugEnable()				freertosEventControlDebugEnable(ledRgbControlEventNumber);
+#define ledRgbControlBlinkEventControlSetActive()				eventControlSetActive(ledRgbControlEventNumber)
+#define ledRgbControlBlinkEventControlSetDelayMS(timerPeriodMs)	eventControlSetDelayMS(ledRgbControlEventNumber, timerPeriodMs)
+#define ledRgbControlBlinkEventControlSetInactive()				eventControlSetInactive(ledRgbControlEventNumber)
+#define ledRgbControlBlinkEventControlDebugEnable()				eventControlDebugEnable(ledRgbControlEventNumber);
 /*******************************************************************************
 * Function Prototypes
 *******************************************************************************/
