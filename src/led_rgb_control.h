@@ -27,58 +27,58 @@ void ledRgbControlBlinkEventHandler(void);
  * @param index  Ver.: always
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStart(uint8_t index, uint16_t count);
+void ledRgbControlBlinkStart(uint8_t index, uint16_t count);
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStartAll(uint16_t count);
+void ledRgbControlBlinkStartAll(uint16_t count);
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStop(uint8_t index);
+void ledRgbControlBlinkStop(uint8_t index);
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStopAll(void);
+void ledRgbControlBlinkStopAll(void);
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
+void ledRgbControlSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
+void ledRgbControlSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
 
-#define ledRgbControlLedSetOutput	ledRGBControlOutputWRGBCallback
-
-/** @brief start blink all led
- *
- *
- * @param count  Ver.: always
- */
-void ledRgbControlLedStateRestore(uint8_t index);
+#define ledRgbControlSetOutput	ledRGBControlOutputWRGBCallback
 
 /** @brief start blink all led
  *
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedStateRestoreAll(void);
+void ledRgbControlStateRestore(uint8_t index);
+
+/** @brief start blink all led
+ *
+ *
+ * @param count  Ver.: always
+ */
+void ledRgbControlStateRestoreAll(void);
 
 /** @brief start blink all led
  *

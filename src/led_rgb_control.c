@@ -67,7 +67,7 @@ static uint16_t blinkingCount = 0;
 static uint32_t blinkFlag = 0;
 static uint32_t stateValidFlags = 0;
 
-static void ledRgbControlLedToggleRGB(uint8_t index, struct rgbOutput *on, struct rgbOutput *off)
+static void ledRgbControlToggleRGB(uint8_t index, struct rgbOutput *on, struct rgbOutput *off)
 {
 	if(blinkFlag & (1<<index))
 	{
@@ -84,7 +84,7 @@ static void ledRgbControlLedToggleRGB(uint8_t index, struct rgbOutput *on, struc
 	stateValidFlags &= ~(1<<index);
 }
 
-static void ledRgbControlLedToggleRGBAll(struct rgbOutput *on, struct rgbOutput *off)
+static void ledRgbControlToggleRGBAll(struct rgbOutput *on, struct rgbOutput *off)
 {
 
 	uint8_t i;
@@ -118,7 +118,7 @@ static void ledRgbControlLedToggleRGBAll(struct rgbOutput *on, struct rgbOutput 
 	}
 }
 
-static void ledRgbControlLedStateSet(uint8_t index, uint8_t currentLevel, uint8_t outputR, uint8_t outputG, uint8_t outputB)
+static void ledRgbControlStateSet(uint8_t index, uint8_t currentLevel, uint8_t outputR, uint8_t outputG, uint8_t outputB)
 {
 	ledOutputState[index].R = outputR;
 	ledOutputState[index].G = outputG;
@@ -142,11 +142,11 @@ void ledRgbControlBlinkEventHandler(void)
 		ledRgbControlBlinkEventControlSetInactive();
 		if(blinkingIndex < INVALID_INDEX)
 		{
-			ledRgbControlLedStateRestore(blinkingIndex);
+			ledRgbControlStateRestore(blinkingIndex);
 		}
 		else
 		{
-			ledRgbControlLedStateRestoreAll();
+			ledRgbControlStateRestoreAll();
 		}
 		blinkingIndex = INVALID_INDEX;
 	}
@@ -155,21 +155,21 @@ void ledRgbControlBlinkEventHandler(void)
 	{
 		if(blinkingIndex >= 1 && blinkingIndex <= LED_RGB_CONTROL_LED_COUNT)
 		{
-			ledRgbControlLedToggleRGB(blinkingIndex, &blOn, &blOff);
+			ledRgbControlToggleRGB(blinkingIndex, &blOn, &blOff);
 		}
 		else
 		{
-			ledRgbControlLedToggleRGB(blinkingIndex, &blOn, &blOff);
+			ledRgbControlToggleRGB(blinkingIndex, &blOn, &blOff);
 		}
 	}
 	else
 	{
-		ledRgbControlLedToggleRGBAll(&blOn, &blOff);
+		ledRgbControlToggleRGBAll(&blOn, &blOff);
 	}
 //	debugPrintln("Blink");
 }
 
-void ledRgbControlLedStateRestore(uint8_t index)
+void ledRgbControlStateRestore(uint8_t index)
 {
 	if(	index >= LED_RGB_CONTROL_LED_COUNT ||
 		!(stateValidFlags & (1<<index)))
@@ -179,7 +179,7 @@ void ledRgbControlLedStateRestore(uint8_t index)
 	ledRGBControlOutputWRGBCallback(index, ledOutputState[index].brightness, ledOutputState[index].R, ledOutputState[index].G, ledOutputState[index].B);
 }
 
-void ledRgbControlLedStateRestoreAll(void)
+void ledRgbControlStateRestoreAll(void)
 {
 	uint8_t i;
 
@@ -192,7 +192,7 @@ void ledRgbControlLedStateRestoreAll(void)
 	}
 }
 
-void ledRgbControlLedSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
+void ledRgbControlSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
 {
 	if(index >= LED_RGB_CONTROL_LED_COUNT)
 	{
@@ -208,10 +208,10 @@ void ledRgbControlLedSet(uint8_t index, uint8_t level, uint8_t outputR, uint8_t 
 		return;
 	}
 	ledRGBControlOutputWRGBCallback(index, level, outputR, outputG, outputB);
-	ledRgbControlLedStateSet(index, level, outputR, outputG, outputB);
+	ledRgbControlStateSet(index, level, outputR, outputG, outputB);
 }
 
-void ledRgbControlLedSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
+void ledRgbControlSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
 {
 	uint8_t i;
 
@@ -226,7 +226,7 @@ void ledRgbControlLedSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uin
 			continue;
 		}
 		ledRGBControlOutputWRGBCallback(i, level, outputR, outputG, outputB);
-		ledRgbControlLedStateSet(i, level, outputR, outputG, outputB);
+		ledRgbControlStateSet(i, level, outputR, outputG, outputB);
 	}
 }
 
@@ -250,7 +250,7 @@ void ledRgbControlBlinkSetOffValue(uint8_t outputR, uint8_t outputG, uint8_t out
  * @param index  Ver.: always
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStart(uint8_t index, uint16_t count)
+void ledRgbControlBlinkStart(uint8_t index, uint16_t count)
 {
 	if(index > LED_RGB_CONTROL_LED_COUNT)
 	{
@@ -268,9 +268,9 @@ void ledRgbControlLedBlinkStart(uint8_t index, uint16_t count)
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStartAll(uint16_t count)
+void ledRgbControlBlinkStartAll(uint16_t count)
 {
-	ledRgbControlLedBlinkStart(LED_RGB_CONTROL_LED_COUNT, count);
+	ledRgbControlBlinkStart(LED_RGB_CONTROL_LED_COUNT, count);
 }
 
 /** @brief start blink all led
@@ -278,7 +278,7 @@ void ledRgbControlLedBlinkStartAll(uint16_t count)
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStop(uint8_t index)
+void ledRgbControlBlinkStop(uint8_t index)
 {
 	if(index != INVALID_INDEX && index != blinkingIndex)
 	{
@@ -288,11 +288,11 @@ void ledRgbControlLedBlinkStop(uint8_t index)
 	ledRgbControlBlinkEventControlSetInactive();
 	if(blinkingIndex < INVALID_INDEX)
 	{
-		ledRgbControlLedStateRestore(blinkingIndex);
+		ledRgbControlStateRestore(blinkingIndex);
 	}
 	else
 	{
-		ledRgbControlLedStateRestoreAll();
+		ledRgbControlStateRestoreAll();
 	}
 	blinkingIndex = INVALID_INDEX;
 }
@@ -302,9 +302,9 @@ void ledRgbControlLedBlinkStop(uint8_t index)
  *
  * @param count  Ver.: always
  */
-void ledRgbControlLedBlinkStopAll(void)
+void ledRgbControlBlinkStopAll(void)
 {
-	ledRgbControlLedBlinkStop(INVALID_INDEX);
+	ledRgbControlBlinkStop(INVALID_INDEX);
 }
 
 
