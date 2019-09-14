@@ -43,6 +43,10 @@
 #define LED_RGB_CONTROL_LED_COUNT (4)
 #endif
 
+#if LED_RGB_CONTROL_LED_COUNT < 1 || LED_RGB_CONTROL_LED_COUNT > 31
+#error LED_RGB_CONTROL_LED_COUNT
+#endif
+
 #ifndef LED_RGB_CONTROL_BLINK_PERIOD
 #define LED_RGB_CONTROL_BLINK_PERIOD (400)
 #endif
@@ -244,6 +248,20 @@ void ledRgbControlSetRGB(uint8_t index, uint8_t outputR, uint8_t outputG, uint8_
 	ledRgbControlStateSetRGB(index, outputR, outputG, outputB);
 }
 
+void ledRgbControlSetBrightnessOutput(uint8_t index, uint8_t brightness)
+{
+	if(index >= LED_RGB_CONTROL_LED_COUNT)
+	{
+		return;
+	}
+	ledRGBControlOutputWRGBCallback
+		(
+			index,
+			brightness,
+			ledOutputState[index].R, ledOutputState[index].G, ledOutputState[index].B
+		);
+}
+
 void ledRgbControlSetBrightness(uint8_t index, uint8_t brightness)
 {
 	if(index >= LED_RGB_CONTROL_LED_COUNT)
@@ -256,7 +274,12 @@ void ledRgbControlSetBrightness(uint8_t index, uint8_t brightness)
 //		debugPrintln("%p not set: %u", "Output", index);
 		return;
 	}
-	ledRGBControlOutputWRGBCallback(index, brightness, ledOutputState[index].R, ledOutputState[index].G, ledOutputState[index].B);
+	ledRGBControlOutputWRGBCallback
+		(
+			index,
+			brightness,
+			ledOutputState[index].R, ledOutputState[index].G, ledOutputState[index].B
+		);
 	ledRgbControlStateSetBrightness(index, brightness);
 }
 

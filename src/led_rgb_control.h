@@ -70,6 +70,8 @@ void ledRgbControlSetRGB(uint8_t index, uint8_t outputR, uint8_t outputG, uint8_
 
 void ledRgbControlSetBrightness(uint8_t index, uint8_t brightness);
 
+void ledRgbControlSetBrightnessOutput(uint8_t index, uint8_t brightness);
+
 void ledRgbControlSetColorXy(uint8_t index, uint8_t currentLevel, uint16_t currentX, uint16_t currentY);
 
 void ledRgbControlSetColorTemp(uint8_t index, uint8_t currentLevel, uint16_t currentTemp);
