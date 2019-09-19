@@ -188,6 +188,38 @@ void ledRgbControlBlinkEventHandler(void)
 //	debugPrintln("Blink");
 }
 
+int ledRgbControlStateGet
+(
+	uint8_t index,
+	uint8_t *currentLevel,
+	uint8_t *outputR,
+	uint8_t *outputG,
+	uint8_t *outputB
+)
+{
+	if(!(stateValidFlags & (1<<index)))
+	{
+		return -1;
+	}
+	if(outputR)
+	{
+		*outputR = ledOutputState[index].R;
+	}
+	if(outputG)
+	{
+		*outputG = ledOutputState[index].G;
+	}
+	if(outputB)
+	{
+		*outputB = ledOutputState[index].B;
+	}
+	if(currentLevel)
+	{
+		*currentLevel = ledOutputState[index].brightness;
+	}
+	return 0;
+}
+
 void ledRgbControlStateRestore(uint8_t index)
 {
 	if(	index >= LED_RGB_CONTROL_LED_COUNT ||

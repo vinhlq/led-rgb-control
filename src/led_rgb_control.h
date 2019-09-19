@@ -50,6 +50,16 @@ void ledRgbControlBlinkStop(uint8_t index);
  */
 void ledRgbControlBlinkStopAll(void);
 
+int ledRgbControlStateGet
+(
+	uint8_t index,
+	uint8_t *currentLevel,
+	uint8_t *outputR,
+	uint8_t *outputG,
+	uint8_t *outputB
+);
+#define ledRgbControlStateGetBrightness(index, currentLevel)	ledRgbControlStateGet(index, currentLevel, NULL, NULL, NULL)
+
 /** @brief start blink all led
  *
  *
