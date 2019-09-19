@@ -67,6 +67,8 @@ int ledRgbControlStateGet
  */
 void ledRgbControlSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
 
+void ledRgbControlSetOutputAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB);
+
 /** @brief start blink all led
  *
  *

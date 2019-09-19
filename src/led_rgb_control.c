@@ -334,6 +334,16 @@ void ledRgbControlSetAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_
 	}
 }
 
+void ledRgbControlSetOutputAll(uint8_t level, uint8_t outputR, uint8_t outputG, uint8_t outputB)
+{
+	uint8_t i;
+
+	for(i=0; i<LED_RGB_CONTROL_LED_COUNT; i++)
+	{
+		ledRGBControlOutputWRGBCallback(i, level, outputR, outputG, outputB);
+	}
+}
+
 #ifdef LED_RGB_CONTROL_COLOR_XY
 // apply RGB transform to XY input
 // Note:  X and Y are well-known quantities in the color space.  It comes
